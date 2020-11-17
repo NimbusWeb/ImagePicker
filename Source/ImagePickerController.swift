@@ -6,7 +6,7 @@ import Photos
 
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
-  func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [NamedImage])
+  func doneWithNamesButtonDidPress(_ imagePicker: ImagePickerController, images: [NamedImage])
   func cancelButtonDidPress(_ imagePicker: ImagePickerController)
 }
 
