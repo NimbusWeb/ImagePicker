@@ -95,8 +95,8 @@ open class AssetManager {
 }
 
 public class NamedImage: NSObject {
-  let name: String?
-  let image: UIImage
+  public let name: String?
+  public let image: UIImage
   init(image: UIImage, name: String?) {
     self.image = image
     self.name = name
