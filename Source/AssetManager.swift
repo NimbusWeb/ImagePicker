@@ -75,4 +75,42 @@ open class AssetManager {
     }
     return images
   }
+
+  public static func resolveNamedAssets(_ assets: [PHAsset], size: CGSize = CGSize(width: 720, height: 1280)) -> [NamedImage] {
+    let imageManager = PHImageManager.default()
+    let requestOptions = PHImageRequestOptions()
+    requestOptions.isSynchronous = true
+
+    var images = [NamedImage]()
+    for asset in assets {
+      imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, _ in
+        if let image = image {
+          let name = (asset.value(forKey: "filename") as? String)?.fileName
+          images.append(NamedImage(image: image, name: name))
+        }
+      }
+    }
+    return images
+  }
+}
+
+public class NamedImage: NSObject {
+  let name: String?
+  let image: UIImage
+  init(image: UIImage, name: String?) {
+    self.image = image
+    self.name = name
+  }
+}
+
+extension String {
+  var fileName: String {
+    var components = self.components(separatedBy: ".")
+    if components.count > 1 {
+      components.removeLast()
+      return components.joined(separator: ".")
+    } else {
+      return self
+    }
+  }
 }

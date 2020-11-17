@@ -6,6 +6,7 @@ import Photos
 
   func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
   func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage])
+  func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [NamedImage])
   func cancelButtonDidPress(_ imagePicker: ImagePickerController)
 }
 
@@ -370,11 +371,11 @@ extension ImagePickerController: BottomContainerViewDelegate {
   }
 
   func doneButtonDidPress() {
-    var images: [UIImage]
+    var images: [NamedImage]
     if let preferredImageSize = preferredImageSize {
-      images = AssetManager.resolveAssets(stack.assets, size: preferredImageSize)
+      images = AssetManager.resolveNamedAssets(stack.assets, size: preferredImageSize)
     } else {
-      images = AssetManager.resolveAssets(stack.assets)
+      images = AssetManager.resolveNamedAssets(stack.assets)
     }
 
     delegate?.doneButtonDidPress(self, images: images)
